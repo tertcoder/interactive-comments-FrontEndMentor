@@ -1,10 +1,10 @@
 :root {
   /** Primary Colors */
   --blue-moderate: #5457b5;
-  --blue-lgrayish: hsl(239, 57%, 85%);
+  --blue-lgrayish: #c3c4ef;
 
   --red-soft: hsl(358, 79%, 66%);
-  --red-pale: hsl(357, 100%, 86%);
+  --red-pale: #ffb8bb;
 
   /** Neutral Colors  */
   --blue-dark: hsl(212, 24%, 26%);
@@ -16,7 +16,7 @@
   --white: hsl(0, 0%, 100%);
 
   /* Typography */
-  --ft-size: 1.8rem;
+  --ft-size: 1.6rem;
   --ft-rubik: "Rubik";
   --ft-w400: 400;
   --ft-w500: 500;
@@ -29,10 +29,15 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
 html {
-  font-size: 50%;
+  font-size: 62.5%;
+  box-sizing: border-box;
 }
 
 body {
@@ -45,6 +50,7 @@ button {
   outline: none;
   border: none;
   background: transparent;
+  cursor: pointer;
 
   display: flex;
   align-items: center;
@@ -76,7 +82,7 @@ textarea::-webkit-scrollbar-thumb {
 }
 
 .comments__container {
-  max-width: 86rem;
+  max-width: 76rem;
   margin-inline: auto;
   margin-block: 5rem;
 }
@@ -119,6 +125,13 @@ textarea::-webkit-scrollbar-thumb {
 .reply__rate img {
   width: 1.4rem;
 }
+
+.comment__rate button:hover,
+.reply__rate button:hover {
+  filter: brightness(0) saturate(100%) invert(35%) sepia(12%) saturate(2873%)
+    hue-rotate(200deg) brightness(99%) contrast(93%);
+}
+
 .comment__rate span,
 .reply__rate span {
   color: var(--blue-moderate);
@@ -171,6 +184,12 @@ textarea::-webkit-scrollbar-thumb {
   font-weight: var(--ft-w700);
 }
 
+.comment__content--header button:hover,
+.reply__content--header button:hover {
+  filter: brightness(0) saturate(100%) invert(81%) sepia(2%) saturate(7030%)
+    hue-rotate(201deg) brightness(102%) contrast(88%);
+}
+
 /* Styling the comment text */
 .comment__content--text,
 .reply__content--text {
@@ -198,11 +217,18 @@ textarea::-webkit-scrollbar-thumb {
   resize: none;
   overflow: auto;
 
-  border: 2px solid var(--gray-light);
+  border: 1px solid var(--gray-light);
   border-radius: var(--rounding);
   padding: 1.5rem 3rem;
   min-height: 10rem;
   color: var(--blue-dark);
+}
+
+.comment__new textarea:active,
+.reply__new textarea:active,
+.comment__new textarea:focus,
+.reply__new textarea:focus {
+  border: 1px solid var(--blue-dark);
 }
 
 .comment__new button,
@@ -228,10 +254,101 @@ textarea::-webkit-scrollbar-thumb {
   margin-left: 4rem;
 }
 
+.tag-style {
+  color: var(--blue-dark);
+  font-weight: var(--ft-w500);
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.action .delete,
+.action .edit {
+  font-weight: var(--ft-w700);
+}
+
+.action .delete {
+  color: var(--red-soft);
+}
+
+.action .delete:hover {
+  filter: brightness(0) saturate(100%) invert(73%) sepia(26%) saturate(508%)
+    hue-rotate(309deg) brightness(103%) contrast(103%);
+}
+
+.action .edit {
+  color: var(--blue-moderate);
+}
+
+.action .edit:hover {
+  filter: brightness(0) saturate(100%) invert(81%) sepia(2%) saturate(7030%)
+    hue-rotate(201deg) brightness(102%) contrast(88%);
+}
+
+/* Popup */
+.popupAction {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-dark);
+}
+.popupAction .overlay {
+  position: absolute;
+  inset: 0;
+  background: hsla(210, 8%, 53%, 0.443);
+  backdrop-filter: blur(2px);
+  z-index: -1;
+}
+
+.popupAction .popup {
+  max-width: 36rem;
+  background: var(--gray-light);
+  padding: 3rem;
+  border-radius: var(--rounding);
+}
+
+.popupAction .popup h3 {
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+}
+
+.popupAction .popup p {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.popupAction .yes-no {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.popupAction .yes-no > .btn {
+  flex: 1;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  font-weight: var(--ft-w700);
+  color: var(--gray-vlight);
+
+  padding: 2rem 1rem;
+  border-radius: var(--rounding);
+}
+.popupAction .yes-no .no__btn {
+  background-color: var(--blue-grayish);
+}
+.popupAction .yes-no .yes__btn {
+  background-color: var(--red-soft);
+}
+
 /* @media Queries */
 @media screen and (max-width: 768px) {
   html {
-    font-size: 60%;
+    font-size: 50%;
   }
   .comment__box,
   .reply__box {
@@ -250,8 +367,8 @@ textarea::-webkit-scrollbar-thumb {
   .comment__content--header button,
   .reply__content--header button {
     position: absolute;
-    bottom: 1rem;
-    right: 2rem;
+    bottom: 4rem;
+    right: 3rem;
   }
 
   .comment__new,
@@ -266,7 +383,6 @@ textarea::-webkit-scrollbar-thumb {
   .comment__new textarea,
   .reply__new textarea {
     width: 100%;
-    padding-inline: 2rem;
   }
   .comment__new button,
   .reply__new button {
