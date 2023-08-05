@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <title>Frontend Mentor | Interactive comments section</title>
+
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+    </style>
+    <script src="./js/app.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="comment__container">
+        <ul>
+          <li>
+            <div class="comment__box">
+              <div class="comment__like">
+                <span>+</span>
+                <span>12</span>
+                <span>-</span>
+              </div>
+              <div class="comment__content">
+                <div class="comment__content--header">
+                  <div class="left">
+                    <img src="./images/avatars/image-amyrobson.png" alt="" />
+                    <span>amyrobson</span>
+                    <span>1 month ago</span>
+                  </div>
+                  <button>
+                    <img src="./images/" alt="" />
+                  </button>
+                </div>
+                <p class="comment__content--text">
+                  Impressive! Though it seems the drag feature could be
+                  improved. But overall it looks incredible. You've nailed the
+                  design and the responsiveness at various breakpoints works
+                  really well.
+                </p>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div class="comment__new">
+          <div class="current-user"></div>
+          <form class="comment__form">
+            <input type="text" name="new-comment" id="text-comment" />
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>.
+    </div>
+  </body>
+</html>
