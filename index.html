@@ -32,14 +32,18 @@
   </head>
   <body>
     <div class="container">
-      <div class="comment__container">
-        <ul>
-          <li>
+      <div class="comments__container">
+        <ul class="comments__list">
+          <li class="comment__box">
             <div class="comment__box">
-              <div class="comment__like">
-                <span>+</span>
+              <div class="comment__rate">
+                <button>
+                  <img src="./images/icon-plus.svg" alt="satisfied" />
+                </button>
                 <span>12</span>
-                <span>-</span>
+                <button>
+                  <img src="./images/icon-minus.svg" alt="unsatisfied" />
+                </button>
               </div>
               <div class="comment__content">
                 <div class="comment__content--header">
@@ -49,7 +53,158 @@
                     <span>1 month ago</span>
                   </div>
                   <button>
-                    <img src="./images/" alt="" />
+                    <img src="./images/icon-reply.svg" alt="reply" />
+                    <span class="reply">Reply</span>
+                  </button>
+                </div>
+                <p class="comment__content--text">
+                  Impressive! Though it seems the drag feature could be
+                  improved. But overall it looks incredible. You've nailed the
+                  design and the responsiveness at various breakpoints works
+                  really well.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="comment">
+            <div class="comment__box">
+              <div class="comment__rate">
+                <button>
+                  <img src="./images/icon-plus.svg" alt="satisfied" />
+                </button>
+                <span>12</span>
+                <button>
+                  <img src="./images/icon-minus.svg" alt="unsatisfied" />
+                </button>
+              </div>
+              <div class="comment__content">
+                <div class="comment__content--header">
+                  <div class="left">
+                    <img src="./images/avatars/image-amyrobson.png" alt="" />
+                    <span>amyrobson</span>
+                    <span>1 month ago</span>
+                  </div>
+                  <button>
+                    <img src="./images/icon-reply.svg" alt="reply" />
+                    <span class="reply">Reply</span>
+                  </button>
+                </div>
+                <p class="comment__content--text">
+                  Impressive! Though it seems the drag feature could be
+                  improved. But overall it looks incredible. You've nailed the
+                  design and the responsiveness at various breakpoints works
+                  really well.
+                </p>
+              </div>
+            </div>
+            <div class="reply__container">
+              <ul class="replies__list">
+                <li class="reply">
+                  <div class="reply__box">
+                    <div class="reply__rate">
+                      <button>
+                        <img src="./images/icon-plus.svg" alt="satisfied" />
+                      </button>
+                      <span>12</span>
+                      <button>
+                        <img src="./images/icon-minus.svg" alt="unsatisfied" />
+                      </button>
+                    </div>
+                    <div class="reply__content">
+                      <div class="reply__content--header">
+                        <div class="left">
+                          <img
+                            src="./images/avatars/image-amyrobson.png"
+                            alt=""
+                          />
+                          <span>amyrobson</span>
+                          <span>1 month ago</span>
+                        </div>
+                        <button>
+                          <img src="./images/icon-reply.svg" alt="reply" />
+                          <span class="reply">Reply</span>
+                        </button>
+                      </div>
+                      <p class="reply__content--text">
+                        Impressive! Though it seems the drag feature could be
+                        improved. But overall it looks incredible. You've nailed
+                        the design and the responsiveness at various breakpoints
+                        works really well.
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <div class="reply__new">
+                <img
+                  src="./images/avatars/image-juliusomo.png"
+                  alt="juliusomo"
+                />
+                <textarea
+                  name="new-comment"
+                  id="text-comment"
+                  placeholder="Add a comment..."
+                  value="@amyrobson"
+                >
+@amyrobson </textarea
+                >
+                <button type="submit">Send</button>
+              </div>
+            </div>
+          </li>
+          <li class="comment__box">
+            <div class="comment__box">
+              <div class="comment__rate">
+                <button>
+                  <img src="./images/icon-plus.svg" alt="satisfied" />
+                </button>
+                <span>12</span>
+                <button>
+                  <img src="./images/icon-minus.svg" alt="unsatisfied" />
+                </button>
+              </div>
+              <div class="comment__content">
+                <div class="comment__content--header">
+                  <div class="left">
+                    <img src="./images/avatars/image-amyrobson.png" alt="" />
+                    <span>amyrobson</span>
+                    <span>1 month ago</span>
+                  </div>
+                  <button>
+                    <img src="./images/icon-reply.svg" alt="reply" />
+                    <span class="reply">Reply</span>
+                  </button>
+                </div>
+                <p class="comment__content--text">
+                  Impressive! Though it seems the drag feature could be
+                  improved. But overall it looks incredible. You've nailed the
+                  design and the responsiveness at various breakpoints works
+                  really well.
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="comment__box">
+            <div class="comment__box">
+              <div class="comment__rate">
+                <button>
+                  <img src="./images/icon-plus.svg" alt="satisfied" />
+                </button>
+                <span>12</span>
+                <button>
+                  <img src="./images/icon-minus.svg" alt="unsatisfied" />
+                </button>
+              </div>
+              <div class="comment__content">
+                <div class="comment__content--header">
+                  <div class="left">
+                    <img src="./images/avatars/image-amyrobson.png" alt="" />
+                    <span>amyrobson</span>
+                    <span>1 month ago</span>
+                  </div>
+                  <button>
+                    <img src="./images/icon-reply.svg" alt="reply" />
+                    <span class="reply">Reply</span>
                   </button>
                 </div>
                 <p class="comment__content--text">
@@ -63,11 +218,17 @@
           </li>
         </ul>
         <div class="comment__new">
-          <div class="current-user"></div>
-          <form class="comment__form">
-            <input type="text" name="new-comment" id="text-comment" />
-            <button type="submit">Send</button>
-          </form>
+          <img
+            src="./images/avatars/image-juliusomo.png"
+            alt="juliusomo"
+            srcset=""
+          />
+          <textarea
+            name="new-comment"
+            id="text-comment"
+            placeholder="Add a comment..."
+          ></textarea>
+          <button type="submit">Send</button>
         </div>
       </div>
     </div>
