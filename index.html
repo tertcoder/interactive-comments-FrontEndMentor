@@ -28,13 +28,13 @@
         color: hsl(228, 45%, 44%);
       }
     </style>
-    <script src="./js/app.js"></script>
+    <script src="./js/app.js" defer></script>
   </head>
   <body>
     <div class="container">
       <div class="comments__container">
         <ul class="comments__list">
-          <li class="comment">
+          <!-- <li class="comment">
             <div class="comment__box">
               <div class="comment__rate">
                 <button>
@@ -224,25 +224,21 @@
                 </p>
               </div>
             </div>
-          </li>
+          </li> -->
         </ul>
         <div class="comment__new">
-          <img
-            src="./images/avatars/image-juliusomo.png"
-            alt="juliusomo"
-            srcset=""
-          />
+          <img src="./images/avatars/image-juliusomo.png" alt="juliusomo" />
           <textarea
             name="new-comment"
-            id="text-comment"
+            class="text-comment"
             placeholder="Add a comment..."
           ></textarea>
-          <button type="submit">Send</button>
+          <button type="submit" class="add-comment">Send</button>
         </div>
       </div>
     </div>
 
-    <div class="popupAction">
+    <!-- <div class="popupAction">
       <div class="overlay"></div>
       <div class="popup">
         <h3>Delete Comment</h3>
@@ -255,14 +251,14 @@
           <button class="yes__btn btn">Yes, Delete</button>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Footer -->
     <div class="attribution">
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
         >Frontend Mentor</a
-      >. Coded by <a href="#">Your Name Here</a>.
+      >. Coded by <a href="#">Bon Tertius Tuyishimire</a>.
     </div>
   </body>
 </html>
