@@ -143,40 +143,53 @@ const repliesRendering = replies => {
 
   return replyContainer.outerHTML;
 };
-const commentHandler = comment => `
+const commentHandler = (comment, currentUser) => `
 <li class="comment" id="${comment.id}">
   <div class="comment__box">
-  <div class="comment__rate">
-  <button>
-  <img src="./images/icon-plus.svg" alt="satisfied" />
-  </button>
-  <span>${comment.score}</span>
-  <button>
-  <img src="./images/icon-minus.svg" alt="unsatisfied" />
-  </button>
-  </div>
-  <div class="comment__content">
-  <div class="comment__content--header">
-  <div class="left">
-  <img src="${comment.user.image.png}" alt="${comment.user.username}" />
-  <span>${comment.user.username}</span>
-  <span>${comment.createdAt}</span>
-  </div>
-        <button>
-        <img src="./images/icon-reply.svg" alt="reply" />
-        <span class="reply">Reply</span>
-        </button>
+    <div class="comment__rate">
+      <button>
+        <img src="./images/icon-plus.svg" alt="satisfied" />
+      </button>
+      <span>${comment.score}</span>
+      <button>
+        <img src="./images/icon-minus.svg" alt="unsatisfied" />
+      </button>
+    </div>
+    <div class="comment__content">
+      <div class="comment__content--header">
+        <div class="left">
+          <img src="${comment.user.image.png}" alt="${comment.user.username}" />
+          <span>${comment.user.username}</span>
+          <span>${comment.createdAt}</span>
         </div>
-        <p class="comment__content--text">
-        ${comment.content}
-        </p>
+        <div class="action">
+          ${
+            comment.user.username === currentUser.username
+              ? `<button class="delete">
+            <img src="./images/icon-delete.svg" alt="delete" />
+            <span>delete</span>
+          </button>
+          <button class="edit">
+            <img src="./images/icon-edit.svg" alt="edit" />
+            <span>Edit</span>
+          </button>`
+              : `<button>
+            <img src="./images/icon-reply.svg" alt="reply" />
+            <span class="reply">Reply</span>
+          </button>`
+          }
         </div>
-  </div> 
+      </div>
+      <p class="comment__content--text">${comment.content}</p>
+    </div> 
+  </div>
   ${(comment.replies && repliesRendering(comment.replies)) || ""}
 </li>
 `;
 const commentsRendering = data => {
-  const comments = data.map(d => commentHandler(d)).join(" ");
+  const comments = data
+    .map(comment => commentHandler(comment, dataJSON.currentUser))
+    .join(" ");
   commentsList.insertAdjacentHTML("afterbegin", comments);
 };
 
@@ -200,13 +213,19 @@ const sendComment = () => {
     createdAt: "now",
     content: comment,
   };
-  commentsList.insertAdjacentHTML("beforeend", commentHandler(commentObj));
+  commentsList.insertAdjacentHTML(
+    "beforeend",
+    commentHandler(commentObj, dataJSON.currentUser)
+  );
   dataJSON.comments.push(commentObj);
 
   localStorage.setItem("dataJSON", JSON.stringify(dataJSON));
 };
 
 commentBtn.addEventListener("click", sendComment);
+commentArea.addEventListener("keyup", e => {
+  if (e.key === "Enter") sendComment();
+});
 
 function load() {
   if ("dataJSON" in localStorage) {
