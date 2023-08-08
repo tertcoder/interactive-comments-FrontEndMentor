@@ -71,6 +71,11 @@ const dataJSON = {
   ],
 };
 const commentsList = document.querySelector(".comments__list");
+const commentBtn = document.querySelector(".add-comment");
+const commentArea = document.querySelector(".text-comment");
+/**
+ * Rendering all content in the html from dataJSON object
+ */
 const replyHander = (reply, currentUser) => {
   return ` 
   <li class="reply" id="${reply.id}">
@@ -167,7 +172,7 @@ const commentHandler = comment => `
         </p>
         </div>
   </div> 
-  ${comment.replies && repliesRendering(comment.replies)}
+  ${(comment.replies && repliesRendering(comment.replies)) || ""}
 </li>
 `;
 const commentsRendering = data => {
@@ -178,7 +183,35 @@ const commentsRendering = data => {
 /**
  * Implementing Sending Comment functionnality
  */
+const sendComment = () => {
+  const comment = commentArea.value;
+  commentArea.value = "";
+  commentArea.focus();
 
-(() => {
-  commentsRendering(dataJSON.comments);
-})();
+  const commentObj = {
+    id: Math.floor(Math.random() * 100 + 1),
+    score: 0,
+    user: {
+      image: {
+        png: `${dataJSON.currentUser.image.png}`,
+      },
+      username: `${dataJSON.currentUser.username}`,
+    },
+    createdAt: "now",
+    content: comment,
+  };
+  commentsList.insertAdjacentHTML("beforeend", commentHandler(commentObj));
+  dataJSON.comments.push(commentObj);
+
+  localStorage.setItem("dataJSON", JSON.stringify(dataJSON));
+};
+
+commentBtn.addEventListener("click", sendComment);
+
+function load() {
+  if ("dataJSON" in localStorage) {
+    const data = JSON.parse(localStorage.getItem("dataJSON"));
+    commentsRendering(data.comments);
+  } else commentsRendering(dataJSON.comments);
+}
+load();
