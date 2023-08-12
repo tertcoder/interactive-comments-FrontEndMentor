@@ -1,78 +1,8 @@
-const dataJSON = {
-  currentUser: {
-    image: {
-      png: "./images/avatars/image-juliusomo.png",
-      webp: "./images/avatars/image-juliusomo.webp",
-    },
-    username: "juliusomo",
-  },
-  comments: [
-    {
-      id: 1,
-      content:
-        "Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.",
-      createdAt: "1 month ago",
-      score: 12,
-      user: {
-        image: {
-          png: "./images/avatars/image-amyrobson.png",
-          webp: "./images/avatars/image-amyrobson.webp",
-        },
-        username: "amyrobson",
-      },
-      replies: [],
-    },
-    {
-      id: 2,
-      content:
-        "Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!",
-      createdAt: "2 weeks ago",
-      score: 5,
-      user: {
-        image: {
-          png: "./images/avatars/image-maxblagun.png",
-          webp: "./images/avatars/image-maxblagun.webp",
-        },
-        username: "maxblagun",
-      },
-      replies: [
-        {
-          id: 3,
-          content:
-            "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
-          createdAt: "1 week ago",
-          score: 4,
-          replyingTo: "maxblagun",
-          user: {
-            image: {
-              png: "./images/avatars/image-ramsesmiron.png",
-              webp: "./images/avatars/image-ramsesmiron.webp",
-            },
-            username: "ramsesmiron",
-          },
-        },
-        {
-          id: 4,
-          content:
-            "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
-          createdAt: "2 days ago",
-          score: 2,
-          replyingTo: "ramsesmiron",
-          user: {
-            image: {
-              png: "./images/avatars/image-juliusomo.png",
-              webp: "./images/avatars/image-juliusomo.webp",
-            },
-            username: "juliusomo",
-          },
-        },
-      ],
-    },
-  ],
-};
+import { dataJSON } from "./data.js";
 const commentsList = document.querySelector(".comments__list");
 const commentBtn = document.querySelector(".add-comment");
 const commentArea = document.querySelector(".text-comment");
+
 /**
  * Rendering all content in the html from dataJSON object
  */
@@ -104,13 +34,13 @@ const replyHander = (reply, currentUser) => {
                 reply.user.username === currentUser.username
                   ? `<button class="delete">
                   <img src="./images/icon-delete.svg" alt="delete" />
-                  <span class="">delete</span>
+                  <span>delete</span>
                 </button>
                 <button class="edit">
                 <img src="./images/icon-edit.svg" alt="edit" />
-                <span class="">Edit</span>
+                <span>Edit</span>
                 </button>`
-                  : `<button>
+                  : `<button class="reply-comment">
                 <img src="./images/icon-reply.svg" alt="reply" />
                 <span class="reply">Reply</span>
                 </button>`
@@ -143,7 +73,8 @@ const repliesRendering = replies => {
 
   return replyContainer.outerHTML;
 };
-const commentHandler = (comment, currentUser) => `
+const commentHandler = (comment, currentUser) => {
+  const commentHTML = `
 <li class="comment" id="${comment.id}">
   <div class="comment__box">
     <div class="comment__rate">
@@ -173,7 +104,7 @@ const commentHandler = (comment, currentUser) => `
             <img src="./images/icon-edit.svg" alt="edit" />
             <span>Edit</span>
           </button>`
-              : `<button>
+              : `<button class="reply-comment" onclick="replyContainerForm()">
             <img src="./images/icon-reply.svg" alt="reply" />
             <span class="reply">Reply</span>
           </button>`
@@ -186,6 +117,8 @@ const commentHandler = (comment, currentUser) => `
   ${(comment.replies && repliesRendering(comment.replies)) || ""}
 </li>
 `;
+  return commentHTML;
+};
 const commentsRendering = data => {
   const comments = data
     .map(comment => commentHandler(comment, dataJSON.currentUser))
@@ -221,11 +154,18 @@ const sendComment = () => {
 
   localStorage.setItem("dataJSON", JSON.stringify(dataJSON));
 };
-
 commentBtn.addEventListener("click", sendComment);
 commentArea.addEventListener("keyup", e => {
   if (e.key === "Enter") sendComment();
 });
+
+/**
+ * Implementing Replying comment functionnality
+ */
+// const replyBtn = document.querySelector(".reply-comment");
+// console.log(replyBtn);
+const replyBtn = document.querySelectorAll(".reply-comment");
+console.log(replyBtn);
 
 function load() {
   if ("dataJSON" in localStorage) {
