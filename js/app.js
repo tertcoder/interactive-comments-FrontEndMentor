@@ -2,7 +2,6 @@ import { dataJSON } from "./data.js";
 const commentsList = document.querySelector(".comments__list");
 const commentBtn = document.querySelector(".add-comment");
 const commentArea = document.querySelector(".text-comment");
-
 /**
  * Rendering all content in the html from dataJSON object
  */
@@ -104,7 +103,7 @@ const commentHandler = (comment, currentUser) => {
             <img src="./images/icon-edit.svg" alt="edit" />
             <span>Edit</span>
           </button>`
-              : `<button class="reply-comment" onclick="replyContainerForm()">
+              : `<button class="reply-comment">
             <img src="./images/icon-reply.svg" alt="reply" />
             <span class="reply">Reply</span>
           </button>`
@@ -124,6 +123,7 @@ const commentsRendering = data => {
     .map(comment => commentHandler(comment, dataJSON.currentUser))
     .join(" ");
   commentsList.insertAdjacentHTML("afterbegin", comments);
+  replyingHandling();
 };
 
 /**
@@ -162,10 +162,39 @@ commentArea.addEventListener("keyup", e => {
 /**
  * Implementing Replying comment functionnality
  */
-// const replyBtn = document.querySelector(".reply-comment");
-// console.log(replyBtn);
-const replyBtn = document.querySelectorAll(".reply-comment");
-console.log(replyBtn);
+function replyingHandling() {
+  const replyButtons = document.querySelectorAll(".reply-comment");
+  replyButtons.forEach(replyBtn =>
+    replyBtn.addEventListener("click", () => {
+      if (replyBtn.closest(".reply")) return;
+      const greatParentBtn = replyBtn.closest(".comment");
+      console.log(greatParentBtn);
+      const currentComment = replyingTo(greatParentBtn.id);
+      console.log(currentComment);
+      const replyContainer = greatParentBtn.querySelector(".reply__container");
+      const replyForm = `
+        <div class="reply__new">
+                  <img
+                    src="./images/avatars/image-juliusomo.png"
+                    alt="juliusomo"
+                  />
+                  <textarea
+                    name="new-comment"
+                    id="text-comment"
+                    placeholder="Add a comment..."
+                    value="@${currentComment.user.username}"
+                  >@${currentComment.user.username} </textarea>
+                  <button type="submit">Send</button>
+                </div>
+        `;
+      replyContainer.insertAdjacentHTML("beforeend", replyForm);
+    })
+  );
+}
+
+function replyingTo(commentId) {
+  return dataJSON.comments.find(data => data.id === +commentId);
+}
 
 function load() {
   if ("dataJSON" in localStorage) {
